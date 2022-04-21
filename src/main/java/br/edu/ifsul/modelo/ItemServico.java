@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -37,6 +39,16 @@ public class ItemServico implements Serializable {
     @NotNull(message = "O valor total deve ser informado.")
     @Column(name = "valor_total", nullable = false, columnDefinition = "numeric(6,2)")
     private Double valorTotal;
+    
+    @NotNull(message = "O serviço deve ser informado.")
+    @ManyToOne
+    @JoinColumn(name = "servico", referencedColumnName = "id", nullable = false)
+    private Servico servico;
+    
+    @NotNull(message = "A ordem do serviço deve ser informada.")
+    @ManyToOne
+    @JoinColumn(name = "ordem_servico_id", referencedColumnName = "id", nullable = false)    
+    private OrdemServico ordemServico;
     
     public ItemServico() {
         
@@ -96,6 +108,34 @@ public class ItemServico implements Serializable {
      */
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
+    }
+    
+    /**
+     * @return the servico
+     */
+    public Servico getServico() {
+        return servico;
+    }
+
+    /**
+     * @param servico the servico to set
+     */
+    public void setServico(Servico servico) {
+        this.servico = servico;
+    }
+
+    /**
+     * @return the ordemServico
+     */
+    public OrdemServico getOrdemServico() {
+        return ordemServico;
+    }
+
+    /**
+     * @param ordemServico the ordemServico to set
+     */
+    public void setOrdemServico(OrdemServico ordemServico) {
+        this.ordemServico = ordemServico;
     }
 
     @Override

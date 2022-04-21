@@ -2,12 +2,17 @@
 package br.edu.ifsul.modelo;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -37,6 +42,19 @@ public class Servico implements Serializable {
     @NotNull(message = "O valor deve ser informado.")
     @Column(name = "valor", nullable = false, columnDefinition = "numeric(6,2)")
     private Double valor;
+    
+    @ManyToMany
+    @JoinTable(name = "produtos",
+            // Se refere a classe Servico.
+            joinColumns = 
+                    @JoinColumn(name = "servico", referencedColumnName = "id", 
+                            nullable = false),
+            // Se refere ao tipo da lista <Produto>
+            inverseJoinColumns = 
+                    @JoinColumn(name = "produto", referencedColumnName = "id", 
+                            nullable = false)
+    )     
+    private Set<Produto> produtos = new HashSet<>();
     
     public Servico() {
         
@@ -82,6 +100,20 @@ public class Servico implements Serializable {
      */
     public void setValor(Double valor) {
         this.valor = valor;
+    }
+    
+    /**
+     * @return the produtos
+     */
+    public Set<Produto> getProdutos() {
+        return produtos;
+    }
+
+    /**
+     * @param produtos the produtos to set
+     */
+    public void setProdutos(Set<Produto> produtos) {
+        this.produtos = produtos;
     }
 
     @Override

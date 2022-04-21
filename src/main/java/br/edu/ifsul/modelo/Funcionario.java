@@ -18,10 +18,10 @@ import org.hibernate.validator.constraints.Length;
 @Table(name = "funcionario")
 public class Funcionario extends Pessoa {
     
-    @NotNull(message = "O nome de usuário é um campo obrigatório.")
-    @NotBlank(message = "O nome de usuário não pode ficar em branco.")
-    @Length(max = 40, message = "O nome de usuário não pode ter mais que {max} caracteres.")
-    @Column(name = "nome_usuario", length = 40, nullable = false)
+    @NotNull(message = "O nome do funcionario é um campo obrigatório.")
+    @NotBlank(message = "O nome do funcionario não pode ficar em branco.")
+    @Length(max = 40, message = "O nome do funcionario não pode ter mais que {max} caracteres.")
+    @Column(name = "nome_funcionario", length = 40, nullable = false)
     private String nomeUsuario;
     
     @NotNull(message = "A senha é um campo obrigatório.")
@@ -80,7 +80,7 @@ public class Funcionario extends Pessoa {
         this.ativo = ativo;
     }
 
-    @Override
+    /*@Override
     public int hashCode() {
         int hash = 7;
         hash = 17 * hash + Objects.hashCode(this.nomeUsuario);
@@ -103,5 +103,5 @@ public class Funcionario extends Pessoa {
             return false;
         }
         return true;
-    }
+    }*/
 }

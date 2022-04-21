@@ -54,7 +54,7 @@ public class Pet implements Serializable {
     @Column(name = "especie", length = 40, nullable = false)
     private String especie;
     
-    @NotNull(message = "A raca deve ser informada") //Não deixar null
+    @NotNull(message = "A raca deve ser informada.") // Não deixar null.
     @ManyToOne
     @JoinColumn(name = "raca", referencedColumnName = "id", nullable = false)
     private Raca raca;
